@@ -12,13 +12,16 @@ class Company(models.Model):
     Currentprice = models.DecimalField(max_digits=6, decimal_places=2)
     Marketcap = models.PositiveBigIntegerField()
     Ebitda = models.BigIntegerField(blank=True, null=True)
-    Revenuegrowth = models.DecimalField(max_digits=8, decimal_places=4)
+    Revenuegrowth = models.DecimalField(max_digits=8, decimal_places=4, null=True, blank=True)
     City = models.CharField(max_length=50)
     State = models.CharField(max_length=2, blank=True, null=True)
     Country = models.CharField(max_length=50)
     Fulltimeemployees = models.PositiveIntegerField()
-    Longbusinesssummary = models.TextField(max_length=300)
+    Longbusinesssummary = models.TextField(max_length=5000)
     Weight = models.DecimalField(max_digits=19, decimal_places=8)
     
-    def __str__(self) -> str:
-        return str(self.Longname)
+    class Meta:
+        ordering = ['Symbol']
+    
+    def __str__(self):
+        return str(self.Shortname)
