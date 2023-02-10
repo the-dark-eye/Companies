@@ -53,10 +53,14 @@ npm install
 ```
 ***
 ## _Running the development server_
+
+> Please make sure you are connected to internet before running the dev environment. This app makes use of bootstrap which pulls resources from the internet.
+> Also the ports 8000 and 3000 should be free.
 1. Navigate to the repository directory "Companies" and start the Django development server:
 ```python
 python manage.py runserver
 ```
+> Django server uses port 8000. API endpoint is http://localhost:8000/ for both GET and POST requests
 2. Start the React development server in another terminal window:
 ```sql
 npm start
