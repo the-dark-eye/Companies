@@ -2,16 +2,15 @@
 
 This is a guide to setup the development environment for the full-stack web application **Companies** built using Django and React.
 
-## _Prerequisites_
 ***
+## _Prerequisites_
 * Node.js
 * npm
 * Python 3
 * pip
 
-
-## _Setting up the backend_
 ***
+## _Setting up the backend_
 1. Clone this repository: [Companies](https://github.com/the-dark-eye/Companies.git)
 ```git 
 git clone https://github.com/the-dark-eye/Companies.git
@@ -42,8 +41,8 @@ python manage.py add_data
 ```python
 python manage.py createsuperuser
 ```
-## _Setting up the frontend_
 ***
+## _Setting up the frontend_
 1. Go to the frontend directory:
 ```bash
 cd frontend
@@ -52,8 +51,8 @@ cd frontend
 ```bash
 npm install
 ```
+***
 ## _Running the development server_
-****
 1. Navigate to the repository directory "Companies" and start the Django development server:
 ```python
 python manage.py runserver
@@ -62,7 +61,7 @@ python manage.py runserver
 ```sql
 npm start
 ```
-3. Access the application at http://localhost:3000 in your browser.
+3.  Access the application at http://localhost:3000 in your browser.
 
 
 
