@@ -107,11 +107,16 @@ class App extends Component {
     render() {
       return (
         <main>
-        <h1 className="text-white text-uppercase text-center my-4">List of all Companies</h1>
-          <div className="">
-            <button onClick={this.createItem} className="btn btn-success">Add Company</button>
+        <div class="container-fluid">
+          <h3 className="text-black text-uppercase text-center my-4">List of all Companies</h3>
+          <hr/>
+          <div className="row">
+              <div className="col-12">
+                <button onClick={this.createItem} className="btn btn-success btn-md mb-4 w-20">Add Company</button>
+              </div>
           </div>
-          <Table striped>
+          <div className="row">
+          <Table striped bordered hover className="companyTable">
             <thead>
               <tr>
                 {/* {this.renderKeys()} */}
@@ -137,6 +142,7 @@ class App extends Component {
               {this.renderItems()}
             </tbody>
           </Table>
+          </div>
         {this.state.modal ? (
           <Modal
             activeItem={this.state.activeItem}
@@ -144,6 +150,7 @@ class App extends Component {
             onSave={this.handleSubmit}
           />
         ): null}
+        </div>
       </main>
       )
     }
