@@ -54,8 +54,7 @@ npm install
 ***
 ## _Running the development server_
 
-> Please make sure you are connected to internet before running the dev environment. This app makes use of bootstrap which pulls resources from the internet.
-> Also the ports 8000 and 3000 should be free.
+> This app uses the ports 8000 and 3000. Make sure they are free before running the app.
 1. Navigate to the repository directory "Companies" and start the Django development server:
 ```python
 python manage.py runserver

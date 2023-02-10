@@ -1,7 +1,11 @@
 import React, { Component } from "react"
 import Modal from "./components/Modal";
 import axios from "axios";
-import {Table} from 'reactstrap';
+import { Table } from 'reactstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 class App extends Component {
     state = {
       activeItem: {
@@ -12,8 +16,8 @@ class App extends Component {
         Sector: "",	
         Industry: "",	
         Currentprice: 0.0,	
-        Marketcap: 0.0,	
-        Ebitda: 0.0,	
+        Marketcap: 0,	
+        Ebitda: 0,	
         Revenuegrowth: 0.0,	
         City: "",	
         State: "",	
@@ -32,8 +36,11 @@ class App extends Component {
         this.setState({
           companies
         });
-      } catch(e) {
-        console.log(e);
+        // toast.success('Data fetched successfully');
+        console.log(this.state.companies);
+      } catch(error) {
+        console.log(error);
+        // if (Object.keys(error).length === 0) {toast.error('Error receiving content from API').then(() => {return (<ToastContainer limit={1}/>)})};
       }
     }
 
@@ -44,10 +51,31 @@ class App extends Component {
     handleSubmit = item => {
       this.toggle();
       if (this.state.companies.some(e => e.Symbol === item.Symbol)) {
-        console.log("Item already exists in the database")
+        toast.error("Company with this Symbol already exists in the database");
+        console.log(("Company with this Symbol already exists in the database"));
         return;
       }
-      axios.post('http://localhost:8000/', item)
+      try {
+        axios.post('http://localhost:8000/', item).then((response) => { 
+          this.setState(prevState => ({
+            companies: [item, ...prevState.companies]
+          }))
+          toast.success("Company successfully added in the database");
+          console.log(("Company successfully added in the database"));
+        }
+        ).catch((error) => {
+          if (error.response) {
+            console.log(error.response.data);
+            console.log('Response status ' + error.response.status);
+            console.log(error.response.headers);
+            toast.error("Oops! There was an error. Check console for more details");
+          }
+        }
+        )
+      } catch(e) {
+        console.log(e.response.data);
+        toast.error("Oops! Check console for error details")
+      }
     };
 
     createItem = () => {
@@ -59,8 +87,8 @@ class App extends Component {
             Sector: "",	
             Industry: "",	
             Currentprice: 0.0,	
-            Marketcap: 0.0,	
-            Ebitda: 0.0,	
+            Marketcap: 0,	
+            Ebitda: 0,	
             Revenuegrowth: 0.0,	
             City: "",	
             State: "",	
@@ -107,7 +135,7 @@ class App extends Component {
     render() {
       return (
         <main>
-        <div class="container-fluid">
+        <div className="container-fluid">
           <h3 className="text-black text-uppercase text-center my-4">List of all Companies</h3>
           <hr/>
           <div className="row">
@@ -150,6 +178,17 @@ class App extends Component {
             onSave={this.handleSubmit}
           />
         ): null}
+        <ToastContainer 
+          position="bottom-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          draggable
+          pauseOnHover
+          theme="dark"
+          />
         </div>
       </main>
       )
