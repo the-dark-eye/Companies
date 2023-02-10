@@ -63,5 +63,12 @@ npm start
 ```
 3.  Access the application at http://localhost:3000 in your browser.
 
+***
+# References
 
+1. [Django official documentation](https://docs.djangoproject.com/en/4.1/topics)
+2. [Django Rest Framework](https://www.django-rest-framework.org/topics/)
+3. [React Official Documentation](https://reactjs.org/docs/getting-started.html)
+4. [Youtube](https://youtube.com)
+5. [stackoverflow.com](https://stackoverflow.com/)
 
