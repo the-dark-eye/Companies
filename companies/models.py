@@ -2,6 +2,8 @@ from django.db import models
 
 # Create your models here.
 class Company(models.Model):
+    """Create company model based on csv file
+    """
     
     Exchange = models.CharField(max_length=3)
     Symbol = models.CharField(max_length=5, primary_key=True)
@@ -21,6 +23,8 @@ class Company(models.Model):
     Weight = models.DecimalField(max_digits=19, decimal_places=8)
     
     class Meta:
+        """Set ordering by Symbol field
+        """
         ordering = ['Symbol']
     
     def __str__(self):

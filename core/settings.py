@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'companies',
     'rest_framework',
-    'corsheaders',
+    'corsheaders',  # this app is required for handling server headers from react app
 ]
 
 MIDDLEWARE = [

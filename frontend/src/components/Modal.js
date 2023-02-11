@@ -1,5 +1,8 @@
-import React, {Component} from "react";
+// This code defines a custom modal component in React using the "reactstrap" library. 
+// The modal is used for adding a company to a list and is defined using the "Modal" component from the "reactstrap" library.
 
+// Import required libraries
+import React, {Component} from "react";
 import {
     Button,
     Modal,
@@ -12,6 +15,8 @@ import {
     Label
 } from "reactstrap";
 
+// Create a custom modal component called "CustomModal" which inherits props from Component class
+// and sets the initial state of the form input using props
 export default class CustomModal extends Component {
     constructor(props) {
         super(props);
@@ -19,16 +24,21 @@ export default class CustomModal extends Component {
             activeItem: this.props.activeItem
         };
     }
+
+    // update the activeItem (props) state as the fields in the form change
     handleChange = e => {
         let {name, value} = e.target;
         const activeItem = { ...this.state.activeItem, [name]: value };
         this.setState({activeItem});
     };
 
+    // render the button form using Modal
+    // The modal has a header, body, and footer, defined using the "ModalHeader", "ModalBody", and "ModalFooter" components from "reactstrap" 
+    // The header displays the text "Add Company". The body contains the form inputs, and the footer contains the save button
     render() {
-        const {toggle, onSave} = this.props;
+        const {toggle, onSave} = this.props;    // toggle is a function for closing the modal and onSave is a function for saving input values
         return (
-            <Modal isOpen={true} toggle={toggle}>
+            <Modal isOpen={true} toggle={toggle}>   
                 <ModalHeader toggle={toggle}>Add Company</ModalHeader>
                 <ModalBody>
                     <Form>

@@ -1,3 +1,8 @@
+// This code implements a React component that fetches data from an API and displays it in a table
+// Button functions are handled using Modal library
+// POST requests are being handles using axios
+
+// Import necessary libraries
 import React, { Component } from "react"
 import Modal from "./components/Modal";
 import axios from "axios";
@@ -6,7 +11,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+
 class App extends Component {
+    // Initialize the state object with an activeItem object and an array of companies objects. 
+    // The activeItem object is used to keep track of the current item being manipulated, 
+    // and the companies array holds the data fetched from the API
     state = {
       activeItem: {
         Exchange: "",
@@ -29,6 +38,7 @@ class App extends Component {
       companies: []
     };
 
+    // Fetch data from the API using fetch and store in the companies array
     async componentDidMount() {
       try {
         const res = await fetch('http://localhost:8000/');
@@ -44,17 +54,26 @@ class App extends Component {
       }
     }
 
+    // User function to turn modal on and off
     toggle = () => {
       this.setState({ modal: !this.state.modal });
     };
 
+    // Function for adding a new item to the companies array. This function is called when the user submits the modal form. 
+    // If a company with the same symbol already exists, the user is notified. 
+    // If not, the new company is added to the database using a POST request to the API. 
+    // If there is an error, the user is notified and error details are logged to the console.
     handleSubmit = item => {
-      this.toggle();
+      this.toggle();  
+
+      // Following if command checks if the user entered Symbol exists already in the database. Since symbol is a primary key of the table,
+      // its duplication is not allowed
       if (this.state.companies.some(e => e.Symbol === item.Symbol)) {
         toast.error("Company with this Symbol already exists in the database");
         console.log(("Company with this Symbol already exists in the database"));
         return;
       }
+
       try {
         axios.post('http://localhost:8000/', item).then((response) => { 
           this.setState(prevState => ({
@@ -78,6 +97,7 @@ class App extends Component {
       }
     };
 
+    // createItem function is triggered when user clicks on 'Add Company' button
     createItem = () => {
       const item = {
             Exchange: "", 
@@ -97,9 +117,10 @@ class App extends Component {
             Longbusinesssummary: "",	
             Weight: 0.0
           };
-      this.setState({ activeItem: item, modal: !this.state.modal });
+      this.setState({ activeItem: item, modal: !this.state.modal });  // set activeItem to an empty item and open modal
     };
 
+    // render table headers
     renderItems = () => {
       return this.state.companies.map(item => (
         <tr key={item.Symbol}>
@@ -123,6 +144,7 @@ class App extends Component {
       ));
     }
 
+    //// Attempted to automate the above written piece of code
     // renderKeys = () => {
     //   var dict = this.state.companies;
     //   console.log(this.state.companies[0]);
@@ -132,6 +154,7 @@ class App extends Component {
     //   )
     // }
 
+    // render the output html
     render() {
       return (
         <main>
